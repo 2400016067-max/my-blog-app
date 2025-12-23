@@ -1,20 +1,5 @@
-import Link from 'next/link';
-import { posts } from '@/data/posts';
-
-// --- BAGIAN INI YANG HARUS ADA ---
-export async function generateStaticParams() {
-  // Next.js butuh array berisi slug agar bisa membuat file HTML statis
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
-// Tambahkan ini agar aman di GitHub Pages
-export const dynamicParams = false; 
-// ---------------------------------
-
-export default async function BlogDetail({ params }) {
-  const { slug } = await params; // Next.js 15+ menggunakan await untuk params
+export default function BlogDetail({ params }) {
+  const { slug } = params;
   const post = posts.find((p) => p.slug === slug);
 
   if (!post) {
